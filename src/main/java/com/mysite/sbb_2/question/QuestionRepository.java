@@ -1,4 +1,4 @@
-package com.mysite.sbb_2;
+package com.mysite.sbb_2.question;
 
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;

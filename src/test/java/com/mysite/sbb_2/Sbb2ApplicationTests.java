@@ -1,5 +1,9 @@
 package com.mysite.sbb_2;
 
+import com.mysite.sbb_2.answer.Answer;
+import com.mysite.sbb_2.answer.AnswerRepository;
+import com.mysite.sbb_2.question.Question;
+import com.mysite.sbb_2.question.QuestionRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

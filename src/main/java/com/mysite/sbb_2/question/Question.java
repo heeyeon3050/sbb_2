@@ -1,9 +1,10 @@
-package com.mysite.sbb_2;
+package com.mysite.sbb_2.question;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysite.sbb_2.answer.Answer;
 import jakarta.persistence.*;
 
 import lombok.Getter;
