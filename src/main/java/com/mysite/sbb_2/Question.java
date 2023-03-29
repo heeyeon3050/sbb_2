@@ -1,6 +1,7 @@
 package com.mysite.sbb_2;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -25,5 +26,10 @@ public class Question {
     private LocalDateTime createDate;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE) //답변 여러개에 대해 질문은 하나
-    private List<Answer> answerList;
+    private List<Answer> answerList = new ArrayList<>();
+
+    public void addAnswer(Answer a) {
+        a.setQuestion(this); //this는 question 객체
+        answerList.add(a);
+    }
 }
