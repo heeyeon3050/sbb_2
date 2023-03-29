@@ -15,4 +15,10 @@ public class MainController {
         System.out.println("index");
         return "index";
     }
+
+    //ROOT URL
+    @GetMapping("/")
+    public String root() {
+        return "redirect:/question/list";
+    }
 }
