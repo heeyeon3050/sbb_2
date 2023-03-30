@@ -1,15 +1,18 @@
 package com.mysite.sbb_2.question;
 
 import com.mysite.sbb_2.answer.AnswerForm;
+import com.mysite.sbb_2.user.SiteUser;
+import com.mysite.sbb_2.user.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.security.Principal;
 
 @RequestMapping("/question")
 @RequiredArgsConstructor //questionRepository 속성을 포함하는 생성자를 생성
@@ -17,6 +20,7 @@ import java.util.List;
 public class QuestionController {
 
     private final QuestionService questionService;
+    private final UserService userService;
 
     @GetMapping("/list")
     public String list(Model model, @RequestParam(value="page", defaultValue="0") int page) {
@@ -32,18 +36,21 @@ public class QuestionController {
         return "question_detail";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/create")
     public String questionCreate(QuestionForm questionForm) {
         return "question_form";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/create")
     //@Valid 를 붙여야 검증 기능이 동작. bindingResult는 @Valid로 인해 검증이 수행된 결과를 의미하는 객체
-    public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult) {
+    public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()) {
             return "question_form";
         }
-        questionService.create(questionForm.getSubject(), questionForm.getContent()); //매개변수를 subject, content 대신 QuestionForm 객체로 변경
+        SiteUser siteUser = userService.getUser(principal.getName());
+        questionService.create(questionForm.getSubject(), questionForm.getContent(), siteUser); //매개변수를 subject, content 대신 QuestionForm 객체로 변경
         return "redirect:/question/list"; // 질문 저장후 질문목록으로 이동
     }
 }

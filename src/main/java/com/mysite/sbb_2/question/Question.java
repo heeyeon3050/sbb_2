@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mysite.sbb_2.answer.Answer;
+import com.mysite.sbb_2.user.SiteUser;
 import jakarta.persistence.*;
 
 import lombok.Getter;
@@ -33,4 +34,7 @@ public class Question {
         a.setQuestion(this); //this는 question 객체
         answerList.add(a);
     }
+
+    @ManyToOne
+    private SiteUser author;
 }
