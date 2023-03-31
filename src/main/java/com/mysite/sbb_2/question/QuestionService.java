@@ -83,4 +83,9 @@ public class QuestionService {
             }
         };
     }
+
+    public void increaseViews(Question question) {
+        question.setViews(question.getViews()+1);
+        questionRepository.save(question);
+    }
 }

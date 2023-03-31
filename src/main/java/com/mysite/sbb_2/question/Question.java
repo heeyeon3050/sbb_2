@@ -7,10 +7,12 @@ import java.util.Set;
 
 import com.mysite.sbb_2.answer.Answer;
 import com.mysite.sbb_2.user.SiteUser;
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import jakarta.persistence.*;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @Setter
@@ -43,4 +45,10 @@ public class Question {
 
     @ManyToMany
     Set<SiteUser> voter;
+
+    //@Column(nullable = false)
+    //@Column(columnDefinition = "long default 0")
+    @NotNull
+    @ColumnDefault("0")
+    private long views;
 }
