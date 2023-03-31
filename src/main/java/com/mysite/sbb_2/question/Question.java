@@ -3,6 +3,7 @@ package com.mysite.sbb_2.question;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.mysite.sbb_2.answer.Answer;
 import com.mysite.sbb_2.user.SiteUser;
@@ -39,4 +40,7 @@ public class Question {
     private SiteUser author;
 
     private LocalDateTime modifyDate;
+
+    @ManyToMany
+    Set<SiteUser> voter;
 }
